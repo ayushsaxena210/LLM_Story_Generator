@@ -1,0 +1,87 @@
+<!-- templates/edit_story.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Story</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        textarea, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form action="/publish" method="POST">
+        <h2>Story Title:</h2>
+        <label for="story_title">Story Title:</label>
+        <textarea id="story_title" name="story_title" rows="1" cols="100" required>{{ story_title }}</textarea><br>
+
+        <h2>Full Story:</h2>
+        <textarea id="full_story" name="full_story" rows="10" cols="100" required>{{ full_story }}</textarea>
+
+        <h2>Twists:</h2>
+        {% for index in range(twists|length) %}
+            {% set twist = twists[index] %}
+            <hr>
+            <label for="twist_title{{ index }}">Twist {{ index + 1 }} Title:</label>
+            <input type="text" id="twist_title{{ index }}" name="twist_titles[]" value="{{ twist[0] }}" required><br><br>
+
+            <label for="twist{{ index }}">Twist {{ index + 1 }}:</label>
+            <textarea id="twist{{ index }}" name="twists_content[]" required>{{ twist[1] }}</textarea>
+            <input type="hidden" name="original_twists[]" value="{{ twist[1] }}">
+
+            <label for="rank{{ index }}">Rank:</label>
+            <input type="number" id="rank{{ index }}" name="ranks[]" value="{{ index }}" required><br>
+        {% endfor %}
+
+        <button type="submit" name="action" value="approve">Approve</button>
+        <button type="submit" name="action" value="reject">Reject</button>
+    </form>
+</body>
+</html>
