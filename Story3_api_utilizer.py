@@ -1,5 +1,9 @@
 import requests
-api_key = "RE9BTU5ySk5rTks0V3Budjo0ZTQzMmU4shsglNzRlMjseggiZDNlNjFiNTA2NmE0YjdjNDkxMzExZmY2YjZhNTJm"
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("story3_api_key")
 
 def create_story(api_key, title, body):
     # API endpoint URL for creating a new story

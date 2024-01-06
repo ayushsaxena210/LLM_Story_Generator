@@ -1,7 +1,11 @@
 import os
 import openai
 import pandas as pd
-openai.api_key = "sk-6KEdgdgdRGoDQSaFHT3BlbkFJ7f5tcUKXLAdWuvq50mu6"
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+openai.api_key = os.getenv("openai_api_key")
 
 def create_story(base_story_prompt):
     response = openai.Completion.create(
