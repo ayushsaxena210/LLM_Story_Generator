@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
         crossorigin="anonymous">
 
     <style>
-        body {
+        .custombox {
             background-color: #f8f9fa;
             font-family: 'Arial', sans-serif;
             text-align: center;
@@ -64,8 +65,12 @@
         }
     </style>
 </head>
+
 <body>
-    <h1>Story Creator</h1>
+
+    <a href="/dashboard"><button class="btn btn-warning mt-3 float-right">Dashboard</button></a>
+    <div class="custombox">
+        <h1>Story Creator</h1>
     <form action="/create_story" method="POST">
         <label for="base_story">Base Story:</label>
         <textarea id="base_story" name="base_story" rows="10" oninput="updateCharCount()" required></textarea>
@@ -95,5 +100,6 @@
             charCount.textContent = "Characters: " + textarea.value.length;
         }
     </script>
+</div>
 </body>
 </html>

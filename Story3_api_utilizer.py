@@ -137,3 +137,45 @@ def publish_story(story_title, story, twists_data):
         for hash_id in hash_id_records:
             publish(api_key, hash_id)
 
+
+def Analytics():
+    # API endpoint URL for publishing a twist
+    api_url = "https://story3.com/api/v2/stories/my"
+
+    # Request headers
+    headers = {
+        "Content-Type": "application/json",
+        "x-auth-token": api_key
+    }
+    # An empty JSON object as the request body
+    request_body = {}
+    published_stories_data = None
+    try:
+
+        response = requests.get(api_url, json=request_body, headers=headers)
+
+        if response.status_code == 200:
+            published_stories_data = response.json()
+        else:
+            return response.status_code, response.text
+
+    except requests.RequestException as e:
+        return e
+
+    if published_stories_data:
+        all_analystics_data = []
+        for story in published_stories_data:
+            hashId = story['hashId']
+            api_url_revenue = f"https://story3.com/api/v2/analytics/{hashId}"
+            published_stories_revenue_data = None
+            try:
+                response = requests.get(api_url_revenue, json=request_body, headers=headers)
+                if response.status_code == 200:
+                    published_stories_revenue_data = response.json()
+                else:
+                    return response.status_code, response.text
+            except requests.RequestException as e:
+                return e
+
+            all_analystics_data.append(published_stories_revenue_data)
+    return all_analystics_data

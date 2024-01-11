@@ -1,6 +1,6 @@
 # app.py
 from flask import Flask, render_template, request, redirect, url_for
-from Story3_api_utilizer import publish_story
+from Story3_api_utilizer import publish_story, Analytics
 from generate_story import generate_story
 app = Flask(__name__)
 
@@ -59,6 +59,26 @@ def publish():
         return redirect(url_for('index'))
     elif request.form['action'] == 'reject':
         return redirect(url_for('index'))
+
+@app.route('/dashboard')
+def dashboard():
+    dashboard_data = Analytics()
+    unique_viewers = sum(int(item['viewers']) for item in dashboard_data)
+    freeConversion = sum(float(item['freeConversion']) for item in dashboard_data)
+    paidConversion = sum(float(item['paidConversion']) for item in dashboard_data)
+    column_sums = {
+        'views': sum(int(item['views']) for item in dashboard_data),
+        'revenue': sum(float(item['revenue']) for item in dashboard_data),
+        'freeTwistUnlockers': sum(int(item['freeTwistUnlockers']) for item in dashboard_data),
+        'paidTwistUnlockers': sum(int(item['paidTwistUnlockers']) for item in dashboard_data),
+        'freeConversion': freeConversion,
+        'paidConversion': paidConversion,
+        'viewers': unique_viewers,
+        'CRFree': freeConversion/len(dashboard_data),
+        'CRPaid': paidConversion/len(dashboard_data),
+    }
+
+    return render_template('dashboard.html', data=dashboard_data, column_sums=column_sums)
 
 if __name__ == '__main__':
     app.run(debug=True)

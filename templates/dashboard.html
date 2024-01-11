@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Add your custom CSS styles here if needed -->
+    <style>
+        body {
+            padding: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-3">Dashboard</h1>
+
+        <table class="table mt-3 table-striped ">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Views</th>
+                    <th>Revenue</th>
+                    <th>Free Twist Unlockers</th>
+                    <th>Paid Twist Unlockers</th>
+                    <th>Free Conversion</th>
+                    <th>Paid Conversion</th>
+                    <th>Viewers</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                    <tr>
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.views }}</td>
+                        <td>{{ item.revenue }}</td>
+                        <td>{{ item.freeTwistUnlockers }}</td>
+                        <td>{{ item.paidTwistUnlockers }}</td>
+                        <td>{{ "{:.2f}".format(item.freeConversion) }}%</td>
+                        <td>{{ "{:.2f}".format(item.paidConversion) }}%</td>
+
+                        <td>{{ item.viewers }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+        <h3>Summary</h3>
+        <table class="table mt-3 table-striped">
+            <tr>
+                <td>views</td>
+                <td>revenue</td>
+                <td>freeTwistUnlockers</td>
+                <td>paidTwistUnlockers</td>
+                <td>freeConversion</td>
+                <td>paidConversion</td>
+                <td>Unique viewers</td>
+                <td>CRFree</td>
+                <td>CRPaid</td>
+
+            </tr>
+
+             <tr>
+
+                <td>{{ column_sums.views }}</td>
+                <td>{{ column_sums.revenue }}</td>
+                <td>{{ column_sums.freeTwistUnlockers }}</td>
+                <td>{{ column_sums.paidTwistUnlockers }}</td>
+                <td>{{ "{:.2f}".format(column_sums.freeConversion) }}%</td>
+                <td>{{ "{:.2f}".format(column_sums.paidConversion) }}%</td>
+                <td>{{ column_sums.viewers }}</td>
+                <td>{{ "{:.2f}".format(column_sums.CRFree) }}</td>
+                <td>{{ "{:.2f}".format(column_sums.CRPaid) }}</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <!-- Link to Bootstrap JS and any additional JavaScript scripts here if needed -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
