@@ -42,7 +42,7 @@ Visit the link provided in the terminal (open in your browser) to access the app
 - Users can write a base story on this page.
 - The language model will then generate the story's title and twists.
 
-### Page 2: Review and Modify Story
+### Page 2: Review Story
 
 ![Page 2 Image](https://i.ibb.co/KbQQdGr/Screenshot-619.png)
 
@@ -55,6 +55,11 @@ Visit the link provided in the terminal (open in your browser) to access the app
 
 - If the user approves the story, it will be submitted to Story3.com.
 - The story will now be available on Story3.com for further engagement.
+  
+### Page 3: Dashboard
+
+![Page 3 Image](https://i.ibb.co/sVkPgmm/dashboard.png)
+- User can view stats of all stories here
 
 ## Note
 
